@@ -4,7 +4,7 @@ var Tree = function(value) {
 
   // your code here
   newTree.children = [];  // fix me
-  newTree = Object.assign(newTree, treeMethods);
+  newTree = _.extend(newTree, treeMethods);
 
   return newTree;
 };
@@ -28,7 +28,7 @@ treeMethods.contains = function(target) {
         checkChild(node[i].children);
       }
     }
-  }
+  };
   
   checkChild(this.children);
 
@@ -39,4 +39,8 @@ treeMethods.contains = function(target) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ 
+ addChild: O(1)
+ contains: O(n)
+ 
  */
