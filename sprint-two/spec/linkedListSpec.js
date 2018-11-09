@@ -52,4 +52,11 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it('should have the head not equal to null when multiple nodes are added', function() {
+    linkedList.addToTail(5);
+    linkedList.addToTail(6);
+    linkedList.addToTail(7);
+    linkedList.addToTail(8);
+    expect(linkedList.head).to.not.equal(null);
+  });
 });
