@@ -34,7 +34,7 @@ describe('hashTable', function() {
     hashTable.remove('Steven');
     expect(hashTable.retrieve('Steven')).to.equal(undefined);
   });
-
+  
   it('should handle hash function collisions', function() {
     var v1 = 'val1';
     var v2 = 'val2';
@@ -45,6 +45,43 @@ describe('hashTable', function() {
     expect(hashTable.retrieve(v1)).to.equal(v1);
     expect(hashTable.retrieve(v2)).to.equal(v2);
     window.getIndexBelowMaxForKey = oldHashFunction;
+  });
+  
+  // additional tests
+  it('should handle hash function collisions for multiple indexes in storage', function() {
+    var v1 = 'val1';
+    var v2 = 'val2';
+    var v3 = 'val3';
+    var v4 = 'val4';
+    var v5 = 'val5';
+    var v6 = 'val6';
+    var oldHashFunction = window.getIndexBelowMaxForKey;
+    window.getIndexBelowMaxForKey = function() { return 0; };
+    hashTable.insert(v1, v1);
+    hashTable.insert(v2, v2);
+    expect(hashTable.retrieve(v1)).to.equal(v1);
+    expect(hashTable.retrieve(v2)).to.equal(v2);
+    window.getIndexBelowMaxForKey = function() { return 1; };
+    hashTable.insert(v3, v3);
+    hashTable.insert(v4, v4);
+    expect(hashTable.retrieve(v3)).to.equal(v3);
+    expect(hashTable.retrieve(v4)).to.equal(v4);
+    window.getIndexBelowMaxForKey = function() { return 2; };
+    hashTable.insert(v5, v5);
+    hashTable.insert(v6, v6);
+    expect(hashTable.retrieve(v5)).to.equal(v5);
+    expect(hashTable.retrieve(v6)).to.equal(v6);
+    window.getIndexBelowMaxForKey = oldHashFunction;
+  });
+
+  it('should overwrite values that have the same key when not inserted consecutively', function() {
+    hashTable.insert('Bob', 'Loblaw');
+    hashTable.insert('Megan', 'Blake');
+    hashTable.insert('Megan', 'Collins');
+    hashTable.insert('Bob', 'Williams');
+    hashTable.insert('Bob', 'Barker');
+    expect(hashTable.retrieve('Bob')).to.equal('Barker');
+    expect(hashTable.retrieve('Megan')).to.equal('Collins');
   });
   
   // (Advanced! Remove the extra "x" when you want the following tests to run)

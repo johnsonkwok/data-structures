@@ -7,12 +7,11 @@ var HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-
   var value = this._storage.get(index);
   var includesKey = _.some(value, function(tuple) {
     return tuple[0] === k;
   });
-  if (value === undefined || includesKey) {
+  if (value === undefined) {
     var tuple = [];
     tuple.push([k, v]);
     this._storage.set(index, tuple);
