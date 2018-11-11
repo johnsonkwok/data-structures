@@ -11,7 +11,7 @@ HashTable.prototype.insert = function(k, v) {
   var includesKey = _.some(value, function(tuple) {
     return tuple[0] === k;
   });
-  if (value === undefined) {
+  if (value === undefined || includesKey) {
     var tuple = [];
     tuple.push([k, v]);
     this._storage.set(index, tuple);
