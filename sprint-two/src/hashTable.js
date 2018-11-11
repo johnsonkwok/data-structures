@@ -11,10 +11,20 @@ HashTable.prototype.insert = function(k, v) {
   var includesKey = _.some(value, function(tuple) {
     return tuple[0] === k;
   });
-  if (value === undefined || includesKey) {
+  if (value === undefined) {
     var tuple = [];
     tuple.push([k, v]);
     this._storage.set(index, tuple);
+  } else if (includesKey) {
+    var currValIdx;
+    _.each(value, function(tuple, i) {
+      if (tuple[0] === k) {
+        currValIdx = i;
+      }
+    });
+    value.splice(currValIdx, 1);
+    value.push([k, v]);
+    this._storage.set(index, value);
   } else {
     value.push([k, v]);
     this._storage.set(index, value);

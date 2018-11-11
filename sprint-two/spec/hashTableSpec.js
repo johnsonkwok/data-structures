@@ -73,16 +73,6 @@ describe('hashTable', function() {
     expect(hashTable.retrieve(v6)).to.equal(v6);
     window.getIndexBelowMaxForKey = oldHashFunction;
   });
-
-  it('should overwrite values that have the same key when not inserted consecutively', function() {
-    hashTable.insert('Bob', 'Loblaw');
-    hashTable.insert('Megan', 'Blake');
-    hashTable.insert('Megan', 'Collins');
-    hashTable.insert('Bob', 'Williams');
-    hashTable.insert('Bob', 'Barker');
-    expect(hashTable.retrieve('Bob')).to.equal('Barker');
-    expect(hashTable.retrieve('Megan')).to.equal('Collins');
-  });
   
   // (Advanced! Remove the extra "x" when you want the following tests to run)
   xit ('should double in size when needed', function() {
