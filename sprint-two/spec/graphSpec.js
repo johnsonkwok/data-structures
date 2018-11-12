@@ -68,4 +68,21 @@ describe('graph', function() {
     expect(graph.hasEdge(3, 5)).to.equal(true);
     expect(graph.hasEdge(5, 5)).to.equal(true);
   });
+
+  // additional test
+  it('should have multiple edges if one node is connected to multiple nodes and create a symmetrical relationship between the connected nodes', function() {
+    graph.addNode(1);
+    graph.addNode(2);
+    graph.addNode(3);
+    graph.addNode(4);
+    graph.addNode(5);
+    graph.addEdge(1, 5);
+    graph.addEdge(4, 1);
+    graph.addEdge(1, 3);
+    graph.addEdge(2, 1);
+    expect(graph.hasEdge(1, 5)).to.equal(true);
+    expect(graph.hasEdge(2, 1)).to.equal(true);
+    expect(graph.hasEdge(1, 3)).to.equal(true);
+    expect(graph.hasEdge(4, 1)).to.equal(true);
+  });
 });
