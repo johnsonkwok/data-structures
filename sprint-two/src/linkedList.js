@@ -10,12 +10,12 @@ var LinkedList = function() {
     } else {
       list.tail.next = Node(value);
       list.tail = list.tail.next;
-    };
-  }
+    }
+  };
 
   list.removeHead = function() {
-    var currHead = list.head.value;
-    list.head = list.tail;
+    var currHead = list.head.value;       
+    list.head = list.tail;               //  list.head should be list.head.next
     return currHead;
   };
 

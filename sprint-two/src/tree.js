@@ -20,7 +20,7 @@ treeMethods.contains = function(target) {
   let found = false;
 
   var checkChild = function(node) {
-    if (node.length !== 0) {
+    if (node.length !== 0) {          // should also check if target is equal to main node's value, not just child values
       for (var i = 0; i < node.length; i++) {
         if (node[i].value === target) {
           found = true;

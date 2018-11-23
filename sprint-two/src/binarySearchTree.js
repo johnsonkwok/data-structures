@@ -43,8 +43,8 @@ BSTPrototype.contains = function(value) {
 
 BSTPrototype.depthFirstLog = function(callback) {
   callback(this.value);
-  for (var key in this) {
-    if (this[key].value) {
+  for (var key in this) {           // may be going one level too deep (for loop not needed)
+    if (this[key].value) {            // may be redundant
       callback(this[key].value);
     } 
     if (this[key].right) {
